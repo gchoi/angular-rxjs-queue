@@ -42,7 +42,7 @@ export class AppComponent implements OnInit {
         this.funcObsQueue.next(() => {
             console.log('executing func');
             return subject;
-        })
+        });
 
         this.funcObsQueueCount++;
     }
