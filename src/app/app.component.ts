@@ -35,12 +35,12 @@ export class AppComponent implements OnInit {
     public addFuncObs() {
         const currentCount = this.funcObsQueueCount;
 
-        console.log('[QUEUING]', currentCount)
+        console.log('[QUEUING]', currentCount);
 
         const subject = timer(1000).pipe(map(x => currentCount));
 
         this.funcObsQueue.next(() => {
-            console.log('executing func')
+            console.log('executing func');
             return subject;
         })
 
@@ -50,22 +50,22 @@ export class AppComponent implements OnInit {
     private enqueue() {
         const currentCount = this.obsQueueCount;
 
-        console.log('[QUEUING]', currentCount)
+        console.log('[QUEUING]', currentCount);
         const subject = timer(1000).pipe(map(x => currentCount));
-        this.obsQueue.next(subject)
+        this.obsQueue.next(subject);
 
         this.obsQueueCount++;
     }
 
     private process() {
-        console.log('PROCESSING QUEUE...')
+        console.log('PROCESSING QUEUE...');
 
         this.obsQueue
             .pipe(
                 finalize(() => console.log('stopped processing queue')),
                 concatMap(x => x))
             .subscribe(x => {
-                console.log('[PROCESSED]', x)
+                console.log('[PROCESSED]', x);
             });
 
         this.funcObsQueue
@@ -73,7 +73,7 @@ export class AppComponent implements OnInit {
                 finalize(() => console.log('stopped processing queue')),
                 concatMap(x => x()))
             .subscribe(x => {
-                console.log('[PROCESSED]', x)
+                console.log('[PROCESSED]', x);
             });
     }
 
